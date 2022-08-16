@@ -13,7 +13,7 @@ const Details = () => {
           placeholder="Deixe sua avaliação aqui"
           name="username"
         />
-        <div className="login-submit">
+        <div className="details-submit">
           <a href="/">Salvar Avaliação</a>
         </div>
       </div>
