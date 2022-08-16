@@ -1,0 +1,19 @@
+.main-movies-container {
+    margin: 12px;
+    font-size: 16px;
+}
+
+.main-movies-container h4 {
+    margin-bottom: 45px;
+}
+
+.list-movies a {
+    display: block;
+}
+
+@media (min-width: 576px) {
+    .main-movies-container {
+        margin: 40px;
+        font-size: 20px;
+    }
+}
