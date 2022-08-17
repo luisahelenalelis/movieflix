@@ -1,5 +1,7 @@
-import { Link, useHistory, useLocation } from 'react-router-dom';
+//import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { requestBackendLogin } from 'util/requests';
 
 import './styles.css';
 
@@ -8,19 +10,31 @@ type FormData = {
   password: string;
 };
 
-type LocationState = {
-  from: string;
-}
+//type LocationState = {
+  //from: string;
+//};
 
 const Login = () => {
 
-  const location = useLocation<LocationState>();
+  const { register, handleSubmit } = useForm<FormData>();
 
-  const { from } = location.state || { from: { pathname: '/admin' } };
+  const onSubmit = (formData: FormData ) => {
+    requestBackendLogin(formData)
+    .then(response => {
+      console.log('Sucesso', response);
+    })
+    .catch(error => {
+      console.log('Erro', error);
+    })
+  };
+
+  //const location = useLocation<LocationState>();
+
+  //const { from } = location.state || { from: { pathname: '/admin' } };
 
   const [hasError, setHasError] = useState(false);
 
-  const history = useHistory();
+  //const history = useHistory();
 
   return (
     <div className="base-card login-card">
@@ -30,9 +44,10 @@ const Login = () => {
           Erro ao tentar efetuar o Login!
         </div>
       )}
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
+            {...register('username')}
             type="text"
             className={`form-control base-input `}
             placeholder="Email"
@@ -42,6 +57,7 @@ const Login = () => {
         </div>
         <div className="mb-2">
           <input
+            {...register('password')}
             type="password"
             className={`form-control base-input `}
             placeholder="Senha"
@@ -49,8 +65,8 @@ const Login = () => {
           />
           <div className="invalid-feedback d-block">{}</div>
         </div>
-        <div className="login-submit">
-          <a href="/">Fazer login</a>
+        <div className="btn-container">
+          <button className="login-submit">Fazer login</button>
         </div>
       </form>
     </div>

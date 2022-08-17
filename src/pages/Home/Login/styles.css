@@ -15,6 +15,7 @@
 .base-input {
   background-color: #fff;
   height: 46px;
+  color: #000000;
 }
 
 .login-submit {
@@ -26,10 +27,15 @@
   letter-spacing: -0.015em;
   border-radius: 4px;
   padding: 10px 0;
+  text-transform: uppercase;
+  border: none;
+  width: 100%;
+}
+
+.btn-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
 }
 
 @media (min-width: 576px) {

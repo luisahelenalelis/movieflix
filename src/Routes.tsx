@@ -12,6 +12,9 @@ const Routes = () => (
         <Auth />
       </Route>
       <Route path="/movies">
+        <Movies />
+      </Route>
+      <Route path="/movies:movieId">
         <Details />
       </Route>
     </Switch>
