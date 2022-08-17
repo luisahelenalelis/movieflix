@@ -11,30 +11,32 @@ type FormData = {
 };
 
 //type LocationState = {
-  //from: string;
+//from: string;
 //};
 
 const Login = () => {
+  
+  const [hasError, setHasError] = useState(false);
 
   const { register, handleSubmit } = useForm<FormData>();
-
-  const onSubmit = (formData: FormData ) => {
-    requestBackendLogin(formData)
-    .then(response => {
-      console.log('Sucesso', response);
-    })
-    .catch(error => {
-      console.log('Erro', error);
-    })
-  };
 
   //const location = useLocation<LocationState>();
 
   //const { from } = location.state || { from: { pathname: '/admin' } };
 
-  const [hasError, setHasError] = useState(false);
-
   //const history = useHistory();
+
+  const onSubmit = (formData: FormData) => {
+    requestBackendLogin(formData)
+      .then((response) => {
+        setHasError(false);
+        console.log('Sucesso', response);
+      })
+      .catch((error) => {
+        setHasError(true);
+        console.log('Erro', error);
+      });
+  };
 
   return (
     <div className="base-card login-card">
