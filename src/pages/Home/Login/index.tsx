@@ -1,6 +1,6 @@
-//import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
 
 import './styles.css';
@@ -22,9 +22,9 @@ const Login = () => {
 
   //const location = useLocation<LocationState>();
 
-  //const { from } = location.state || { from: { pathname: '/admin' } };
+  //const { from } = location.state || { from: { pathname: '/movie' } };
 
-  //const history = useHistory();
+  const history = useHistory();
 
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
@@ -34,6 +34,7 @@ const Login = () => {
         console.log('Token gerado = ' + token);
         setHasError(false);
         console.log('Sucesso', response);
+        history.push('/movies')
       })
       .catch((error) => {
         setHasError(true);
