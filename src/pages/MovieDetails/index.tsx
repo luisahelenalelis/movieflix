@@ -1,6 +1,6 @@
-import './styles.css';
-
 import { ReactComponent as Star } from 'assets/images/star.svg';
+
+import './styles.css';
 
 const Details = () => {
   return (
