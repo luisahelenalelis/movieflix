@@ -16,8 +16,8 @@ export const BASE_URL =
 
 const tokenKey = 'authData';
 
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
-const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
+export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
+export const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
 
 
 type LoginData = {

@@ -11,6 +11,10 @@
     display: block;
 }
 
+.list-movies p {
+    color: #fff;
+}
+
 @media (min-width: 576px) {
     .main-movies-container {
         margin: 40px;
