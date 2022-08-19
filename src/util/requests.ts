@@ -14,7 +14,7 @@ type LoginResponse = {
 export const BASE_URL =
   process.env.REACT_APP_BACKEND_URL ?? 'https://movieflix-devsuperior.herokuapp.com';
 
-const tokenKey = 'authData';
+export const tokenKey = 'authData';
 
 export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
 export const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
