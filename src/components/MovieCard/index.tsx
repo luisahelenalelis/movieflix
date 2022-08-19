@@ -6,7 +6,7 @@ type Props = {
   movies: Movie;
 };
 
-const ProductCard = ({ movies }: Props) => {
+const MovieCard = ({ movies }: Props) => {
   return (
     <div className="base-card product-card">
       <div className="card-top-container">
@@ -19,4 +19,4 @@ const ProductCard = ({ movies }: Props) => {
   );
 };
 
-export default ProductCard;
+export default MovieCard;

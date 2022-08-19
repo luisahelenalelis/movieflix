@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import ProductCard from 'components/ProductCard';
+import MovieCard from 'components/MovieCard';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Movie } from 'types/movies';
@@ -9,7 +9,6 @@ import { BASE_URL, getAuthData } from 'util/requests';
 import './styles.css';
 
 const SelectMovies = () => {
-
   const [movies, setMovies] = useState<SpringPage<Movie>>();
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const SelectMovies = () => {
         {movies?.content.map((movie) => (
           <div className="col-sm-6 col-lg-4 col-xl-3" key={movie.id}>
             <Link to={'/movies/' + movie?.id}>
-              <ProductCard movies={movie} />
+              <MovieCard movies={movie} />
             </Link>
           </div>
         ))}

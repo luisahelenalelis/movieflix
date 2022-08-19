@@ -57,22 +57,37 @@ const Details = () => {
 
   return (
     <div className="details-container">
-      <h4>{movie?.title}</h4>
+      <div className="movie-header-container">
+        <div className="movie-picture">
+          <img src={movie?.imgUrl} alt={movie?.title} />
+        </div>
+        <div className="movie-title">
+          <h4>{movie?.title}</h4>
+        </div>
+        <div className="movie-synopsis">
+          <p>{movie?.synopsis}</p>
+        </div>
+      </div>
+
       {hasAnyRoles(['ROLE_MEMBER']) && (
         <FormReview movieId={movieId} onInsertReview={handleInsertReview} />
       )}
 
-      <div className="base-card comment-container">
-        {reviews?.map((review) => (
-          <div className="detail-comment" key={review.id}>
-            <span>
-              <Star />
-            </span>
-            <span>{review?.user?.name}</span>
-            <p>{review?.text}</p>
-          </div>
-        ))}
-      </div>
+      {reviews.length !== 0 ? (
+        <div className="base-card comment-container">
+          {reviews?.map((review) => (
+            <div className="detail-comment" key={review.id}>
+              <span>
+                <Star />
+              </span>
+              <span>{review?.user?.name}</span>
+              <p>{review?.text}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>Este filme ainda não possui avaliações!</div>
+      )}
     </div>
   );
 };
