@@ -2,14 +2,15 @@ import axios, { AxiosRequestConfig } from 'axios';
 import ProductCard from 'components/ProductCard';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Movies } from 'types/movies';
+import { Movie } from 'types/movies';
 import { SpringPage } from 'types/spring-page';
 import { BASE_URL, getAuthData } from 'util/requests';
 
 import './styles.css';
 
 const SelectMovies = () => {
-  const [movies, setMovies] = useState<SpringPage<Movies>>();
+
+  const [movies, setMovies] = useState<SpringPage<Movie>>();
 
   useEffect(() => {
     const params: AxiosRequestConfig = {

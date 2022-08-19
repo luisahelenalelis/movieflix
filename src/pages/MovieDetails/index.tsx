@@ -1,41 +1,77 @@
 import { ReactComponent as Star } from 'assets/images/star.svg';
+import axios, { AxiosRequestConfig } from 'axios';
+import FormReview from 'components/FormReview';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Movie } from 'types/movies';
+import { Review } from 'types/review';
+import { hasAnyRoles } from 'util/auth';
+import { BASE_URL, getAuthData } from 'util/requests';
 
 import './styles.css';
 
+type UrlParams = {
+  movieId: string;
+};
+
 const Details = () => {
+  const { movieId } = useParams<UrlParams>();
+
+  const [movie, setMovie] = useState<Movie>();
+
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: BASE_URL + '/movies/' + movieId,
+      headers: {
+        Authorization: `Bearer ${getAuthData().access_token}`,
+      },
+    };
+
+    axios(params).then((response) => {
+      setMovie(response.data);
+    });
+  }, [movieId]);
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: BASE_URL + '/movies/' + movieId + '/reviews',
+      headers: {
+        Authorization: `Bearer ${getAuthData().access_token}`,
+      },
+    };
+
+    axios(params).then((resp) => {
+      setReviews(resp.data);
+    });
+  }, [movieId]);
+
+  const handleInsertReview = (review: Review) => {
+    const clone = [...reviews];
+    clone.push(review);
+    setReviews(clone);
+  };
+
   return (
     <div className="details-container">
-      <h4>Tela detalhes do filme id: 1</h4>
-      <div className="base-card product-details-card">
-        <input
-          type="text"
-          className={`form-control base-input `}
-          placeholder="Deixe sua avaliação aqui"
-          name="username"
-        />
-        <div className="details-submit">
-          <a href="/">Salvar Avaliação</a>
-        </div>
-      </div>
+      <h4>{movie?.title}</h4>
+      {hasAnyRoles(['ROLE_MEMBER']) && (
+        <FormReview movieId={movieId} onInsertReview={handleInsertReview} />
+      )}
+
       <div className="base-card comment-container">
-        <div className="detail-comment">
-          <span>
-            <Star />
-          </span>
-          <span>Maria Silva</span>
-          <p>
-            Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.
-          </p>
-        </div>
-        <div className="detail-comment">
-          <span>
-            <Star />
-          </span>
-          <span>Maria Silva</span>
-          <p>
-            Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.
-          </p>
-        </div>
+        {reviews?.map((review) => (
+          <div className="detail-comment" key={review.id}>
+            <span>
+              <Star />
+            </span>
+            <span>{review?.user?.name}</span>
+            <p>{review?.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

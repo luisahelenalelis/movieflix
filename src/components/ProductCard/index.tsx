@@ -1,9 +1,9 @@
 import './styles.css';
 
-import { Movies } from 'types/movies';
+import { Movie } from 'types/movies';
 
 type Props = {
-  movies: Movies;
+  movies: Movie;
 };
 
 const ProductCard = ({ movies }: Props) => {
