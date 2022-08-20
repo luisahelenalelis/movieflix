@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { AuthContext } from 'AuthContext';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
-import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
+import { getTokenData } from 'util/auth';
+import { requestBackendLogin, saveAuthData } from 'util/requests';
 
 import './styles.css';
 
@@ -15,6 +17,8 @@ type LocationState = {
 };
 
 const Login = () => {
+
+  const { setAuthContextData } = useContext(AuthContext);
 
   const [hasError, setHasError] = useState(false);
 
@@ -30,10 +34,11 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);
-        const token = getAuthData().access_token;
-        console.log('Token gerado = ' + token);
         setHasError(false);
-        console.log('Sucesso', response);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData()
+        })
         history.replace(from);
       })
       .catch((error) => {
