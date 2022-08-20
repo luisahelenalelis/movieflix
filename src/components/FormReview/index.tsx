@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useForm } from 'react-hook-form';
 import { Review } from 'types/review';
-import { BASE_URL, getAuthData } from 'util/requests';
+import { BASE_URL } from 'util/requests';
+import { getAuthData } from 'util/storage';
 
 import './styles.css';
 

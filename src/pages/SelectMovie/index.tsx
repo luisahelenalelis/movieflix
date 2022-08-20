@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Movie } from 'types/movies';
 import { SpringPage } from 'types/spring-page';
-import { BASE_URL, getAuthData } from 'util/requests';
+import { BASE_URL } from 'util/requests';
+import { getAuthData } from 'util/storage';
 
 import './styles.css';
 

@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom';
 import { Movie } from 'types/movies';
 import { Review } from 'types/review';
 import { hasAnyRoles } from 'util/auth';
-import { BASE_URL, getAuthData } from 'util/requests';
+import { BASE_URL } from 'util/requests';
+import { getAuthData } from 'util/storage';
 
 import './styles.css';
 

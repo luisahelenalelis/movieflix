@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import { getAuthData, tokenKey } from './requests';
+import { getAuthData, tokenKey } from './storage';
 
 export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER';
 
@@ -15,10 +15,6 @@ export const getTokenData = (): TokenData | undefined => {
   } catch (error) {
     return undefined;
   }
-};
-
-export const removeAuthData = () => {
-  localStorage.removeItem(tokenKey);
 };
 
 export const isAuthenticated = (): boolean => {
